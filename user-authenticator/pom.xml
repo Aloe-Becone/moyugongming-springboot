@@ -8,7 +8,7 @@
     <description>user-authenticator</description>
     <parent>
         <groupId>com.shiroha</groupId>
-        <artifactId>spring-parent</artifactId>
+        <artifactId>moyugongming</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
