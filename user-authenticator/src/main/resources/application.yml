@@ -1,0 +1,50 @@
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+spring:
+  application:
+    name: user-authenticator
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.mysql.cj.jdbc.MysqlDataSource
+    username: root
+    password: a1436381036
+    url: jdbc:mysql://localhost:3306/moyugongming
+    hikari:
+      maximum-pool-size: 10
+      max-lifetime: 1770000
+    druid:
+      validation-query: SELECT 1 FROM DUAL
+      initial-size: 10
+      min-idle: 10
+      max-active: 200
+      min-evictable-idle-time-millis: 300000
+      test-on-borrow: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 30000
+      pool-prepared-statements: true
+      max-open-prepared-statements: 100
+  data:
+    redis:
+      port: 6379
+      host: localhost
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'prometheus'
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  endpoint:
+    prometheus:
+      enabled: true
