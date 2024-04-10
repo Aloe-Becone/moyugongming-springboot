@@ -16,7 +16,6 @@ import java.util.List;
 @TableName("user")
 public class User implements UserDetails {
 
-
     @TableId(type = IdType.AUTO)
     private Long id;
     // 用户名
@@ -44,10 +43,10 @@ public class User implements UserDetails {
 
     @Override//UserDetails中的方法
     public String getUsername() {
-        return userName;
+        // 使用手机号作为登录凭据
+        return phoneNumber;
     }
 
-    // 必须有的getter方法，使用@Getter注解会导致对应关系错乱
     public String getUserName() {
         return this.userName;
     }

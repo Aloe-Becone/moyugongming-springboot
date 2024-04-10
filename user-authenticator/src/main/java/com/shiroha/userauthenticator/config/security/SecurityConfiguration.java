@@ -18,7 +18,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 
+/**
+ * spring security配置类
+ * <p>
+ *     FIXME: token认证和刷新的api暴露，需加入对请求域的限制
+ * </p>
+ * @author Rem
+ * @version 1.0
+ */
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
@@ -51,6 +60,7 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/user/login", "/user/register", "/user/sendSMS").permitAll()
+                        .requestMatchers("/auth/token/check", "/auth/token/refresh", "/auth/user/details").permitAll()
                         .requestMatchers("/actuator/prometheus").permitAll()
                         .anyRequest()
                         .authenticated())

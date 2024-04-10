@@ -8,6 +8,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 
+/**
+ * 处理http请求和响应的工具类
+ *
+ * @author Rem
+ */
 public class HttpUtil {
     /**
      * 解析请求的参数

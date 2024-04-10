@@ -1,8 +1,8 @@
 package com.shiroha.userauthenticator.config.security;
 
 
-import com.shiroha.commonutils.utils.JwtUtils;
 import com.shiroha.userauthenticator.service.Impl.UserServiceImpl;
+import com.shiroha.userauthenticator.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.io.IOException;
 import jakarta.servlet.FilterChain;

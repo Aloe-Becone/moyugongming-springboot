@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * redis缓存工具类，使用该类中的方法实现redis的缓存和读取、设置超时时间等
+ * @author Rem
  */
 @SuppressWarnings(value = {"unchecked", "rawtypes"})
 @Component

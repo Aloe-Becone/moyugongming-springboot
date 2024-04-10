@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * 响应结果的封装类
+ * @author Rem
  */
 @Data
 @Builder

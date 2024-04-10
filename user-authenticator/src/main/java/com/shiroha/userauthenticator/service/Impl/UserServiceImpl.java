@@ -10,6 +10,7 @@ import com.shiroha.userauthenticator.service.UserService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,16 +23,18 @@ import java.util.Map;
 @Service
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserDetailsService, UserService {
-    @Resource
-    private PasswordEncoder passwordEncoder;
 
     @Resource
     private UserMapper userMapper;
 
+    /**
+     * UserDetailsService中的重写方法
+     */
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+    @Cacheable(value = "userInfo", key = "#phoneNumber", unless = "#result == null")
+    public UserDetails loadUserByUsername(String phoneNumber) throws UsernameNotFoundException {
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(User::getUsername, userName);
+        wrapper.eq(User::getPhoneNumber, phoneNumber);
         try {
             return userMapper.selectOne(wrapper);
         } catch (Exception e) {

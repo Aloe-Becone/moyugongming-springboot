@@ -3,12 +3,12 @@ package com.shiroha.userauthenticator.controller;
 import com.alibaba.fastjson2.JSON;
 
 import com.shiroha.commonutils.bean.Result;
-import com.shiroha.commonutils.utils.JwtUtils;
 import com.shiroha.commonutils.utils.RedisCache;
 import com.shiroha.userauthenticator.domain.User;
 import com.shiroha.userauthenticator.requests.AuthRequest;
 import com.shiroha.userauthenticator.service.Impl.UserServiceImpl;
 import com.shiroha.userauthenticator.utils.HttpClientUtils;
+import com.shiroha.userauthenticator.utils.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -27,6 +27,14 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 
+/**
+ * 用户登录和注册控制器
+ *
+ * <p>
+ *     用户登录、注册、发送验证码、获取用户信息
+ * </p>
+ * @author Rem
+ */
 @RestController
 @Slf4j
 @RequestMapping("/user")
@@ -35,11 +43,11 @@ public class UserController {
 
     final private AuthenticationManager authenticationManager;
 
-    final private PasswordEncoder passwordEncoder;
-
     final private RedisCache redisCache;
 
     final private UserServiceImpl userService;
+
+    final private PasswordEncoder passwordEncoder;
 
     // 生成随机用户名
     private static String genUsername() {
