@@ -1,6 +1,6 @@
-package com.shiroha.userauthenticator.config.web;
+package com.shiroha.restapi.config;
 
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 
 @Configuration
 @EnableWebMvc
-public class WebConfiguration implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -22,13 +22,6 @@ public class WebConfiguration implements WebMvcConfigurer {
                 .allowCredentials(true);
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/public/**")
-                .addResourceLocations("classpath:/public/");
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("classpath:/public/static/");
-    }
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         configurer.defaultContentType(MediaType.APPLICATION_JSON);
@@ -41,3 +34,4 @@ public class WebConfiguration implements WebMvcConfigurer {
         return converter;
     }
 }
+

@@ -3,8 +3,17 @@ global:
   evaluation_interval: 15s
   scrape_timeout: 10s
 
+## targets中的主机号需要换成docker内网ip，也就是替换成宿主机的ipv4
 scrape_configs:
-  - job_name: 'spring'
+  - job_name: 'user-authenticator'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: [ 'localhost:8080' ]
+      - targets: [ '172.26.32.1:8080' ]
+  - job_name: 'rest-api'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.26.32.1:8081' ]
+  - job_name: 'socket-api'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.26.32.1:8082' ]

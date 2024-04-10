@@ -17,6 +17,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- 公共依赖 -->
+        <dependency>
+            <groupId>com.shiroha</groupId>
+            <artifactId>common-utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+
+        </dependency>
         <!-- spring security-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
