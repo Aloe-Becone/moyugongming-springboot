@@ -14,6 +14,11 @@ import java.net.URISyntaxException;
 public class HttpClientUtils {
 
 
+    /**
+     * 调用短信api接口发送短信验证码
+     * @param phoneNumber 手机号
+     * @param code 验证码
+     */
     static public void SendSMSCode(String phoneNumber, int code) {
         String host = "https://dfsns.market.alicloudapi.com";
         String path = "/data/send_sms";
@@ -43,38 +48,6 @@ public class HttpClientUtils {
             HttpStatusCode errorCode = e.getStatusCode();
             log.error("使用第三方api发送验证码出错：{},{}", errorCode, e.getMessage());
             throw e;
-        }
-    }
-
-    static public ResponseEntity<String> invokeOpenAPI(String prompt) throws URISyntaxException {
-        String url = "https://api.openai.com/v1/images/generations";
-        String secretKey = "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";
-
-        URI uri = new URI(url);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer " + secretKey);
-
-
-        RestTemplate restTemplate = new RestTemplate();
-        MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<>();
-        parameters.set("prompt", prompt);
-        parameters.set("n", 1);
-        parameters.set("size", "256x256");
-
-        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(parameters, headers);
-
-        try {
-            ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, requestEntity, String.class);
-            if (response.getStatusCode() == HttpStatus.OK) {
-                log.info(response.getBody());
-                return ResponseEntity.ok(response.getBody());
-            } else {
-                return ResponseEntity.status(response.getStatusCode()).body("error:" + response.getBody());
-            }
-        } catch (HttpClientErrorException e) {
-            HttpStatusCode errorCode = e.getStatusCode();
-            return ResponseEntity.badRequest().body("fail:"+ errorCode);
         }
     }
 }
